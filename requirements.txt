@@ -1,0 +1,22 @@
+# NumLock Light 1.1.0 — runtime requirements
+#
+# Install for development / building:
+#   pip install -r requirements.txt pyinstaller
+#
+# NOTE (1.0.1): the old header claimed "binary wheels include libraqm".
+# That is true on Linux/macOS but FALSE for the Windows wheels
+# (python-pillow/Pillow#7126) — the reason the 1.0.0 OSD rendered Persian
+# disconnected. arabic-reshaper + python-bidi are now REAL runtime deps
+# and are pinned in build\NumLockLight.spec hiddenimports so PyInstaller
+# actually bundles them.
+
+pillow>=10.0        # icon & OSD rendering (raqm used when available)
+pystray>=0.19.3     # system tray icons (win32 backend via ctypes)
+six>=1.16           # pystray dependency (six.moves.queue)
+
+# settings window (HTML UI via WebView2) — Windows only in production
+pywebview>=5.0      # pythonnet + clr_loader are pulled in automatically
+
+# Persian/Arabic shaping + bidi reordering for Tk/Pillow-without-raqm
+arabic-reshaper>=3.0
+python-bidi>=0.4.2

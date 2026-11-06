@@ -1,0 +1,41 @@
+# UTF-8
+# Windows version resource — NumLock Light 1.1.0 (English + Farsi tables)
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(1, 1, 0, 0),
+    prodvers=(1, 1, 0, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x40004,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+  ),
+  kids=[
+    StringFileInfo([
+      StringTable('040904B0', [
+        StringStruct('CompanyName', '100ri.ir'),
+        StringStruct('FileDescription', 'NumLock Light - Smart keyboard lock indicator'),
+        StringStruct('FileVersion', '1.1.0.0'),
+        StringStruct('InternalName', 'NumLockLight'),
+        StringStruct('LegalCopyright', 'Copyright (c) 2026 sadri1993 - 100ri.ir (MIT License)'),
+        StringStruct('OriginalFilename', 'NumLockLight.exe'),
+        StringStruct('ProductName', 'NumLock Light'),
+        StringStruct('ProductVersion', '1.1.0.0'),
+        StringStruct('Comments', 'Persian RTL tray indicator for Num/Caps/Scroll Lock and Insert keys.')
+      ]),
+      StringTable('042904B0', [
+        StringStruct('CompanyName', '100ri.ir'),
+        StringStruct('FileDescription', 'نام‌لاک لایت - نشانگر هوشمند کلیدهای کیبورد'),
+        StringStruct('FileVersion', '1.1.0.0'),
+        StringStruct('InternalName', 'NumLockLight'),
+        StringStruct('LegalCopyright', 'Copyright (c) 2026 sadri1993 - 100ri.ir (MIT License)'),
+        StringStruct('OriginalFilename', 'NumLockLight.exe'),
+        StringStruct('ProductName', 'NumLock Light'),
+        StringStruct('ProductVersion', '1.1.0.0'),
+        StringStruct('Comments', 'نشانگر فارسی و راست‌چین کلیدهای Num/Caps/Scroll Lock و Insert در نوار وظیفه ویندوز.')
+      ])
+    ]),
+    VarFileInfo([VarStruct('Translation', [1033, 1200, 1065, 1200])])
+  ]
+)

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NumLock Light</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body data-theme="dark" data-lang="fa">
+
+<!-- ======================= custom titlebar ======================= -->
+<header id="titlebar">
+  <div class="brand pywebview-drag-region">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2.5"/>
+        <path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9 14h6"/>
+      </svg>
+    </span>
+    <span class="appname">NumLock Light</span>
+    <span class="verchip" id="verchip">v1.0.0</span>
+  </div>
+  <div class="titlebar-spacer pywebview-drag-region"></div>
+  <div class="winbtns">
+    <button class="wbtn" id="btn-minimize" tabindex="-1" aria-label="Minimize">
+      <svg viewBox="0 0 24 24"><path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="wbtn close" id="btn-close" tabindex="-1" aria-label="Close">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ======================= key status strip ======================= -->
+<section id="keystrip" aria-label="Key status">
+  <!-- tiles injected by app.js -->
+</section>
+
+<!-- ======================= main layout ======================= -->
+<div id="layout">
+
+  <nav id="sidebar" aria-label="Sections">
+    <button class="navitem active" data-section="general">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.08a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.08a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.08a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span class="nv-label" data-i18n="sec_general">عمومی</span>
+    </button>
+    <button class="navitem" data-section="keys">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2.5"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9 14h6"/></svg>
+      <span class="nv-label" data-i18n="sec_keys">کلیدها</span>
+    </button>
+    <button class="navitem" data-section="appearance">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="19" cy="13" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="10" cy="19" r="2.5"/><path d="M12 22a10 10 0 1 1 10-10c0 .5-.05 1-.14 1.47A6 6 0 0 0 12 22z" opacity="0"/><path d="M6 12h.01M10 19h.01M13.5 6.5h.01M19 13h.01"/></svg>
+      <span class="nv-label" data-i18n="sec_appearance">ظاهر و آیکون</span>
+    </button>
+    <button class="navitem" data-section="osd">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2.5"/><path d="M12 18v3M8 21h8"/><path d="M7 12l3 3 4-6 3 3" opacity=".85"/></svg>
+      <span class="nv-label" data-i18n="sec_osd">اعلان روی صفحه</span>
+    </button>
+    <button class="navitem" data-section="sound">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>
+      <span class="nv-label" data-i18n="sec_sound">صدا</span>
+    </button>
+    <button class="navitem" data-section="about">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>
+      <span class="nv-label" data-i18n="sec_about">درباره</span>
+    </button>
+
+    <div class="sidebar-foot">
+      <button class="ghostbtn" id="btn-reset" data-i18n="reset">بازنشانی تنظیمات</button>
+      <button class="ghostbtn danger" id="btn-quit" data-i18n="quit">خروج از برنامه</button>
+    </div>
+  </nav>
+
+  <main id="content">
+
+    <!-- ==================== GENERAL ==================== -->
+    <section class="panel active" id="panel-general">
+      <h2 class="ptitle" data-i18n="sec_general">عمومی</h2>
+      <p class="psub" data-i18n="sec_general_sub">وضعیت برنامه و گزینه‌های پایه</p>
+
+      <div class="card">
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="language">زبان برنامه</div>
+            <div class="rh" data-i18n="language_hint">زبان رابط کاربری؛ چیدمان به‌صورت خودکار راست‌چین یا چپ‌چین می‌شود</div>
+          </div>
+          <div class="seg" id="seg-language">
+            <button data-val="fa">فارسی</button>
+            <button data-val="en">English</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="indicator_enabled">فعال بودن نشانگر</div>
+            <div class="rh" data-i18n="indicator_enabled_hint">آیکون وضعیت در نوار وظیفه ویندوز</div>
+          </div>
+          <label class="switch"><input type="checkbox" data-set="enabled"><span class="knob"></span></label>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="startup">اجرای خودکار با شروع ویندوز</div>
+            <div class="rh" data-i18n="startup_hint">افزودن برنامه به فهرست Startup کاربر</div>
+          </div>
+          <label class="switch"><input type="checkbox" id="chk-startup"><span class="knob"></span></label>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="balloon">اعلان ویندوزی هنگام تغییر وضعیت</div>
+            <div class="rh" data-i18n="balloon_hint">نمایش اعلان بالون در کنار آیکون برنامه</div>
+          </div>
+          <label class="switch"><input type="checkbox" data-set="balloon"><span class="knob"></span></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="tray_mode">آیکون در نوار وظیفه</div>
+            <div class="rh" data-i18n="tray_mode_hint">جدا برای هر کلید، یا یک آیکون ترکیبی</div>
+          </div>
+          <div class="seg" id="seg-traymode">
+            <button data-val="per_key" data-i18n="tray_per_key">جدا برای هر کلید</button>
+            <button data-val="single" data-i18n="tray_single">یک آیکون ترکیبی</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="state_text">نمایش متن وضعیت در راهنمای آیکون</div>
+            <div class="rh" data-i18n="state_text_hint">هنگام نگه‌داشتن ماوس روی آیکون</div>
+          </div>
+          <label class="switch"><input type="checkbox" data-set="tray.state_text"><span class="knob"></span></label>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl"><span data-i18n="poll">سرعت بررسی وضعیت</span>&nbsp;<span class="chip" id="poll-chip">۱۵۰</span></div>
+            <div class="rh" data-i18n="poll_hint">مثلاً ۱۵۰ میلی‌ثانیه — عدد کوچک‌تر یعنی واکنش سریع‌تر</div>
+          </div>
+          <input type="range" id="rg-poll" min="80" max="600" step="10" dir="ltr">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== KEYS ==================== -->
+    <section class="panel" id="panel-keys">
+      <h2 class="ptitle" data-i18n="sec_keys">کلیدها</h2>
+      <p class="psub" data-i18n="sec_keys_sub">کلیدهای زیر نظر و رنگ‌های هر کدام — با کلیک روی کاشی بالای صفحه هم می‌توانید وضعیت کلید را عوض کنید</p>
+      <div id="keycards"><!-- injected --></div>
+    </section>
+
+    <!-- ==================== APPEARANCE ==================== -->
+    <section class="panel" id="panel-appearance">
+      <h2 class="ptitle" data-i18n="sec_appearance">ظاهر و آیکون</h2>
+      <p class="psub" data-i18n="sec_appearance_sub">تم، مدل آیکون نشانگر و اندازه آن</p>
+
+      <div class="card">
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="theme">تم برنامه</div>
+          </div>
+          <div class="seg" id="seg-theme">
+            <button data-val="dark" data-i18n="theme_dark">تاریک</button>
+            <button data-val="light" data-i18n="theme_light">روشن</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="icon_size">اندازه آیکون نشانگر</div>
+          </div>
+          <div class="seg" id="seg-iconsize">
+            <button data-val="sm" data-i18n="size_sm">کوچک</button>
+            <button data-val="md" data-i18n="size_md">متوسط</button>
+            <button data-val="lg" data-i18n="size_lg">بزرگ</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardtitle">
+          <span data-i18n="icon_style">مدل آیکون نشانگر</span>
+          <span class="cardhint" data-i18n="icon_style_hint">پیش‌نمایش واقعی هر مدل با وضعیت روشن</span>
+        </div>
+        <div class="stylegrid" id="stylegrid"><!-- injected --></div>
+      </div>
+
+      <div class="card">
+        <div class="cardtitle">
+          <span data-i18n="live_preview">پیش‌نمایش زنده نوار وظیفه</span>
+          <span class="cardhint" data-i18n="live_preview_hint">دقیقاً همان چیزی که الان کنار ساعت می‌بینید</span>
+        </div>
+        <div class="traymock" id="traymock">
+          <div class="tm-icons" id="traymock-icons"><!-- injected --></div>
+          <div class="tm-clock" id="traymock-clock">--:--</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== OSD ==================== -->
+    <section class="panel" id="panel-osd">
+      <h2 class="ptitle" data-i18n="sec_osd">اعلان روی صفحه (OSD)</h2>
+      <p class="psub" data-i18n="sec_osd_sub">نمایش اعلان هنگام روشن یا خاموش شدن کلیدها</p>
+
+      <div class="card">
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="osd_enabled">نمایش اعلان هنگام تغییر وضعیت</div>
+            <div class="rh" data-i18n="osd_enabled_hint">یک کارت شیشه‌ای کنار صفحه نمایش</div>
+          </div>
+          <label class="switch"><input type="checkbox" data-set="osd.enabled"><span class="knob"></span></label>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl"><span data-i18n="osd_duration">مدت نمایش</span>&nbsp;<span class="chip" id="dur-chip">۱٫۲</span>&nbsp;<span class="unit" data-i18n="osd_seconds">ثانیه</span></div>
+            <div class="rh" data-i18n="osd_duration_hint">چقدر روی صفحه بماند</div>
+          </div>
+          <input type="range" id="rg-duration" min="3" max="40" step="1" dir="ltr">
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl"><span data-i18n="osd_scale">بزرگی نمایش</span>&nbsp;<span class="chip" id="scale-chip">۱۰۰٪</span></div>
+            <div class="rh" data-i18n="osd_scale_hint">اندازه کارت اعلان</div>
+          </div>
+          <input type="range" id="rg-scale" min="80" max="160" step="5" dir="ltr">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardtitle"><span data-i18n="osd_position">محل نمایش</span></div>
+        <div class="poswrap">
+          <div class="mongrid" id="posgrid">
+            <!-- 9 buttons injected -->
+          </div>
+          <div class="posside">
+            <button class="btn" id="btn-arrange">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
+              <span data-i18n="osd_arrange">جابه‌جایی با کشیدن ماوس</span>
+            </button>
+            <p class="arrangehint" data-i18n="osd_arrange_hint">اعلان روی صفحه ظاهر می‌شود؛ با ماوس آن را بکشید و هرجا خواستید رها کنید — دابل‌کلیک یا Enter برای ذخیره، Esc برای لغو</p>
+            <button class="btn ghost" id="btn-osd-preview">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span data-i18n="osd_preview">پیش‌نمایش اعلان</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SOUND ==================== -->
+    <section class="panel" id="panel-sound">
+      <h2 class="ptitle" data-i18n="sec_sound">صدا</h2>
+      <p class="psub" data-i18n="sec_sound_sub">افکت صوتی هنگام روشن یا خاموش شدن کلیدها</p>
+
+      <div class="card">
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="sound_enabled">پخش صدا هنگام تغییر وضعیت</div>
+            <div class="rh" data-i18n="sound_enabled_hint">صدای جدا برای روشن و خاموش شدن</div>
+          </div>
+          <label class="switch"><input type="checkbox" data-set="sound.enabled"><span class="knob"></span></label>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl" data-i18n="ui_click">صدای کلیک برای دکمه‌های برنامه</div>
+            <div class="rh" data-i18n="ui_click_hint">افکت ظریف هنگام کار با تنظیمات</div>
+          </div>
+          <label class="switch"><input type="checkbox" data-set="sound.ui_click"><span class="knob"></span></label>
+        </div>
+        <div class="row">
+          <div class="rowtext">
+            <div class="rl"><span data-i18n="volume">میزان صدا</span>&nbsp;<span class="chip" id="vol-chip">۷۰٪</span></div>
+            <div class="rh" data-i18n="volume_hint">میزان بلندی افکت‌های صوتی برنامه</div>
+          </div>
+          <input type="range" id="rg-volume" min="0" max="100" step="5" dir="ltr">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardtitle"><span data-i18n="sound_on">صدای روشن شدن</span></div>
+        <div class="soundgrid" id="soundgrid-on"><!-- injected --></div>
+        <div class="cardtitle mt" style="margin-top:18px"><span data-i18n="sound_off">صدای خاموش شدن</span></div>
+        <div class="soundgrid" id="soundgrid-off"><!-- injected --></div>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="panel" id="panel-about">
+      <h2 class="ptitle" data-i18n="sec_about">درباره</h2>
+
+      <div class="about">
+        <div class="about-hero">
+          <div class="about-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="2.5"/>
+              <path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9 14h6"/>
+            </svg>
+          </div>
+          <div class="about-name">NumLock Light</div>
+          <div class="about-fa" data-i18n="app_name_fa">نام‌لاک لایت</div>
+          <div class="about-tag" data-i18n="about_app">نشانگر هوشمند کلیدهای کیبورد برای ویندوز</div>
+          <div class="about-ver"><span class="chip big" id="about-ver">v1.0.0</span></div>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="ac-label" data-i18n="developer">طراح و توسعه‌دهنده</div>
+            <div class="ac-value">sadri1993</div>
+            <a class="linkbtn" id="lnk-website">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span data-i18n="website">وب‌سایت</span> <span class="ltr">100ri.ir</span>
+            </a>
+            <a class="linkbtn" id="lnk-github">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.11-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+              <span data-i18n="open_github">صفحه پروژه در گیت‌هاب</span>
+            </a>
+          </div>
+          <div class="about-card">
+            <div class="ac-label" data-i18n="credits">اعتبارات و منابع آزاد</div>
+            <ul class="credits">
+              <li><b>Vazirmatn</b> — <span class="ltr">SIL OFL 1.1</span> · rastikerdar</li>
+              <li><b data-i18n="credit_sounds">افکت‌های صوتی</b> — <span class="ltr">CC0</span> · Kenney.nl</li>
+              <li><b data-i18n="credit_icons">آیکون‌ها</b> — <span class="ltr">MIT</span> · Lucide</li>
+              <li><b>pywebview · pystray · Pillow</b> — <span class="ltr">BSD/MIT</span></li>
+            </ul>
+            <div class="license" data-i18n="license_note">این برنامه با مجوز MIT منتشر شده است.</div>
+          </div>
+        </div>
+
+        <div class="about-sys" id="about-sys"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div id="toasts" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
